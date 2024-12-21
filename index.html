@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kalkulator Mobile</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        background-color: black;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      #kalkulator {
+        width: 320px;
+        background-color: #1c1c1c;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5);
+      }
+
+      h1 {
+        margin-bottom: 20px;
+        font-size: 28px;
+      }
+
+      input {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin-bottom: 15px;
+        font-size: 18px;
+        border: none;
+        border-radius: 5px;
+        background-color: #333;
+        color: white;
+      }
+
+      .buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+      }
+
+      button {
+        padding: 15px;
+        font-size: 18px;
+        color: white;
+        background-color: #555;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
+      }
+
+      button:hover {
+        background-color: #777;
+      }
+
+      #hasil {
+        margin-top: 20px;
+        font-size: 24px;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="kalkulator">
+      <h1>Kalkulator</h1>
+      <input type="number" id="angka1" placeholder="Angka pertama" />
+      <input type="number" id="angka2" placeholder="Angka kedua" />
+      <div class="buttons">
+        <button onclick="hitung('tambah')">+</button>
+        <button onclick="hitung('kurang')">-</button>
+        <button onclick="hitung('kali')">x</button>
+        <button onclick="hitung('bagi')">/</button>
+      </div>
+      <h2 id="hasil">Hasil:</h2>
+    </div>
+
+    <script>
+      // Fungsi kalkulasi
+      function hitung(operasi) {
+        const angka1 = parseFloat(document.getElementById("angka1").value);
+        const angka2 = parseFloat(document.getElementById("angka2").value);
+        let hasil = 0;
+
+        if (isNaN(angka1) || isNaN(angka2)) {
+          document.getElementById("hasil").innerText =
+            "Hasil: Masukkan angka yang valid!";
+          return;
+        }
+
+        switch (operasi) {
+          case "tambah":
+            hasil = angka1 + angka2;
+            break;
+          case "kurang":
+            hasil = angka1 - angka2;
+            break;
+          case "kali":
+            hasil = angka1 * angka2;
+            break;
+          case "bagi":
+            if (angka2 === 0) {
+              document.getElementById("hasil").innerText =
+                "Hasil: Tidak dapat membagi dengan nol!";
+              return;
+            }
+            hasil = angka1 / angka2;
+            break;
+          default:
+            document.getElementById("hasil").innerText =
+              "Hasil: Operasi tidak dikenali!";
+            return;
+        }
+
+        document.getElementById("hasil").innerText = `Hasil: ${hasil}`;
+      }
+    </script>
+  </body>
+</html>
